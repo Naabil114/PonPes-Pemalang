@@ -14,7 +14,7 @@ class Madrasah extends Model
     protected $table = 'madrasah';
     protected $primaryKey = 'id_madrasah';
 
-    protected $fillable = ['nama_madrasah', 'deskripsi'];
+    protected $fillable = ['nama_madrasah', 'deskripsi','status'];
 
     public function santri()
     {

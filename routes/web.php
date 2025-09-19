@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\SantriController;
+use App\Http\Controllers\MadrasahController;
 use App\Http\Controllers\DashboardController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -26,6 +27,13 @@ Route::get('create/kamar',[KamarController::class,'create'])->name('kamar.create
 Route::post('store/kamar', [KamarController::class, 'store'])->name('kamar.store');
 Route::get('edit/kamar/{id}',[KamarController::class,'edit'])->name('kamar.edit');
 Route::put('update/kamar/{id}', [KamarController::class, 'update'])->name('kamar.update');
+
+
+Route::get('data/madrasah',[MadrasahController::class,'index'])->name('madrasah.index');
+Route::get('create/madrasah',[MadrasahController::class,'create'])->name('madrasah.create');
+Route::post('store/madrasah', [MadrasahController::class, 'store'])->name('madrasah.store');
+Route::get('edit/madrasah/{id}',[MadrasahController::class,'edit'])->name('madrasah.edit');
+Route::put('update/madrasah/{id}', [MadrasahController::class, 'update'])->name('madrasah.update');
 
 
 
