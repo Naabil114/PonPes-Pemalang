@@ -95,10 +95,10 @@
                                 <p>Data Santri Putra</p>
                             </a>
                         </li>
-                        <li class="nav-item {{ request()->routeIs('santri.index') ? 'active' : '' }}">
-                            <a href="{{ route('santri.index') }}">
+                        <li class="nav-item {{ request()->routeIs('madrasah.index') ? 'active' : '' }}">
+                            <a href="{{ route('madrasah.index') }}">
                                 <i class="far fa-building"></i>
-                                <p>Madrasah</p>
+                                <p>Data Madrasah</p>
                             </a>
                         </li>
                         <li class="nav-item {{ request()->routeIs('kamar.index') ? 'active' : '' }}">
