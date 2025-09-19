@@ -15,7 +15,7 @@ class Santri extends Model
     protected $fillable = [
         'user_id', 'nis', 'nama_santri', 'tempat_lahir', 'tanggal_lahir',
         'jenis_kelamin', 'nama_orang_tua', 'no_telp', 'alamat',
-        'id_madrasah', 'id_kamar', 'status_santri', 'tanggal_daftar', 'password'
+        'id_madrasah', 'id_kamar', 'status_santri', 'tanggal_daftar'
     ];
 
     public function user()

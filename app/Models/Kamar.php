@@ -13,7 +13,7 @@ class Kamar extends Model
     protected $table = 'kamar';
     protected $primaryKey = 'id_kamar';
 
-    protected $fillable = ['nomor_kamar', 'jenis_kelamin', 'kapasitas', 'status'];
+    protected $fillable = ['nama_kamar', 'jenis_kelamin', 'kapasitas', 'status'];
 
     public function santri()
     {
