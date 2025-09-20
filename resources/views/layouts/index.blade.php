@@ -82,13 +82,13 @@
                                 <p>Dashboard</p>
                             </a>
                         </li>
-                         <li class="nav-section">
+                        <li class="nav-section">
                             <span class="sidebar-mini-icon">
                                 <i class="fa fa-ellipsis-h"></i>
                             </span>
                             <h4 class="text-section">Admin Santri Putra</h4>
                         </li>
-                        
+
                         <li class="nav-item {{ request()->routeIs('santri.index') ? 'active' : '' }}">
                             <a href="{{ route('santri.index') }}">
                                 <i class="fas fa-user"></i>
@@ -114,83 +114,31 @@
                             </span>
                             <h4 class="text-section">Components</h4>
                         </li>
-                        <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#base">
-                                <i class="fas fa-layer-group"></i>
-                                <p>Base</p>
-                                <span class="caret"></span>
-                            </a>
-                            <div class="collapse" id="base">
-                                <ul class="nav nav-collapse">
-                                    <li>
-                                        <a href="components/avatars.html">
-                                            <span class="sub-item">Avatars</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="components/buttons.html">
-                                            <span class="sub-item">Buttons</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="components/gridsystem.html">
-                                            <span class="sub-item">Grid System</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="components/panels.html">
-                                            <span class="sub-item">Panels</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="components/notifications.html">
-                                            <span class="sub-item">Notifications</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="components/sweetalert.html">
-                                            <span class="sub-item">Sweet Alert</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="components/font-awesome-icons.html">
-                                            <span class="sub-item">Font Awesome Icons</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="components/simple-line-icons.html">
-                                            <span class="sub-item">Simple Line Icons</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="components/typography.html">
-                                            <span class="sub-item">Typography</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#sidebarLayouts">
+
+                        <li class="nav-item {{ request()->routeIs('komponen_spp.*') ? 'active' : '' }}">
+                            <a data-bs-toggle="collapse" href="#sidebarLayouts"
+                                aria-expanded="{{ request()->routeIs('komponen_spp.*') ? 'true' : 'false' }}">
                                 <i class="fas fa-th-list"></i>
-                                <p>Sidebar Layouts</p>
+                                <p>SPP</p>
                                 <span class="caret"></span>
                             </a>
-                            <div class="collapse" id="sidebarLayouts">
+                            <div class="collapse {{ request()->routeIs('komponen_spp.*') ? 'show' : '' }}"
+                                id="sidebarLayouts">
                                 <ul class="nav nav-collapse">
-                                    <li>
-                                        <a href="sidebar-style-2.html">
-                                            <span class="sub-item">Sidebar Style 2</span>
+                                    <li class="{{ request()->routeIs('komponen_spp.*') ? 'active' : '' }}">
+                                        <a href="{{ route('komponen_spp.index') }}">
+                                            <span class="sub-item">Komponen SPP</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="icon-menu.html">
-                                            <span class="sub-item">Icon Menu</span>
+                                    {{-- <li class="{{ request()->routeIs('pilih_makan.*') ? 'active' : '' }}">
+                                        <a href="{{ route('pilih_makan.index') }}">
+                                            <span class="sub-item">Pilih Makan Santri</span>
                                         </a>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </div>
                         </li>
+
                         <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#forms">
                                 <i class="fas fa-pen-square"></i>
