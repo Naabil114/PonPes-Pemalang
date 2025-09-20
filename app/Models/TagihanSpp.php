@@ -16,7 +16,7 @@ class TagihanSpp extends Model
 
     protected $fillable = [
         'id_santri', 'bulan', 'tahun', 'biaya_makan', 'biaya_listrik',
-        'biaya_sosial', 'biaya_ianah', 'total_tagihan', 'status_tagihan', 'jatuh_tempo'
+        'biaya_sosial', 'biaya_ianah', 'total_tagihan', 'status_tagihan'
     ];
 
     public function santri()

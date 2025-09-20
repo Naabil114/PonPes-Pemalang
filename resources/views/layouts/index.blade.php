@@ -118,7 +118,7 @@
                         <li class="nav-item {{ request()->routeIs('komponen_spp.*') ? 'active' : '' }}">
                             <a data-bs-toggle="collapse" href="#sidebarLayouts"
                                 aria-expanded="{{ request()->routeIs('komponen_spp.*') ? 'true' : 'false' }}">
-                                <i class="fas fa-th-list"></i>
+                                <i class="fas fa-donate"></i>
                                 <p>SPP</p>
                                 <span class="caret"></span>
                             </a>
@@ -133,6 +133,11 @@
                                     <li class="{{ request()->routeIs('pilihan-makan-santri.*') ? 'active' : '' }}">
                                         <a href="{{ route('pilihan-makan-santri.index') }}">
                                             <span class="sub-item">Pilihan Makan Santri</span>
+                                        </a>
+                                    </li>
+                                    <li class="{{ request()->routeIs('penagihan-santri.*') ? 'active' : '' }}">
+                                        <a href="{{ route('penagihan-santri.index') }}">
+                                            <span class="sub-item">Penagihan Santri</span>
                                         </a>
                                     </li>
                                 </ul>
