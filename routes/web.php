@@ -6,6 +6,7 @@ use App\Http\Controllers\SantriController;
 use App\Http\Controllers\MadrasahController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KomponenSppController;
+use App\Http\Controllers\PilihanMakanSantriController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
@@ -32,7 +33,7 @@ Route::put('update/kamar/{id}', [KamarController::class, 'update'])->name('kamar
 
 Route::get('data/madrasah',[MadrasahController::class,'index'])->name('madrasah.index');
 Route::get('create/madrasah',[MadrasahController::class,'create'])->name('madrasah.create');
-Route::post('store/madrasah', [MadrasahController::class, 'store'])->name('madrasah.store');
+Route::post('store/madrasah', action: [MadrasahController::class, 'store'])->name('madrasah.store');
 Route::get('edit/madrasah/{id}',[MadrasahController::class,'edit'])->name('madrasah.edit');
 Route::put('update/madrasah/{id}', [MadrasahController::class, 'update'])->name('madrasah.update');
 
@@ -42,6 +43,12 @@ Route::post('store/komponen_spp', [KomponenSppController::class, 'store'])->name
 Route::get('edit/komponen_spp/{id}',[KomponenSppController::class,'edit'])->name('komponen_spp.edit');
 Route::put('update/komponen_spp/{id}', [KomponenSppController::class, 'update'])->name('komponen_spp.update');
 Route::delete('destroy/komponen_spp/{id}', [KomponenSppController::class, 'destroy'])->name('komponen_spp.destroy');
+
+Route::get('data/pilih/makan/santri',[PilihanMakanSantriController::class,'index'])->name('pilihan-makan-santri.index');
+Route::get('create/pilih/makan/santri',[PilihanMakanSantriController::class,'create'])->name('pilihan-makan-santri.create');
+Route::post('store/pilih/makan/santri', action: [PilihanMakanSantriController::class, 'store'])->name('pilihan-makan-santri.store');
+Route::get('edit/pilih/makan/santri/{id}',[PilihanMakanSantriController::class,'edit'])->name('pilihan-makan-santri.edit');
+Route::put('update/pilih/makan/santri/{id}', [PilihanMakanSantriController::class, 'update'])->name('pilihan-makan-santri.update');
 
 
 
