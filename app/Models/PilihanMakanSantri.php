@@ -13,7 +13,7 @@ class PilihanMakanSantri extends Model
     protected $table = 'pilihan_makan_santri';
     protected $primaryKey = 'id_pilihan_makan';
 
-    protected $fillable = ['id_santri', 'bulan', 'tahun', 'jenis_makan', 'tanggal_pilih'];
+    protected $fillable = ['id_pilihan_makan','id_santri', 'bulan', 'tahun', 'jenis_makan', 'tanggal_pilih'];
 
     public function santri()
     {

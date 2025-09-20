@@ -130,11 +130,11 @@
                                             <span class="sub-item">Komponen SPP</span>
                                         </a>
                                     </li>
-                                    {{-- <li class="{{ request()->routeIs('pilih_makan.*') ? 'active' : '' }}">
-                                        <a href="{{ route('pilih_makan.index') }}">
-                                            <span class="sub-item">Pilih Makan Santri</span>
+                                    <li class="{{ request()->routeIs('pilihan-makan-santri.*') ? 'active' : '' }}">
+                                        <a href="{{ route('pilihan-makan-santri.index') }}">
+                                            <span class="sub-item">Pilihan Makan Santri</span>
                                         </a>
-                                    </li> --}}
+                                    </li>
                                 </ul>
                             </div>
                         </li>
