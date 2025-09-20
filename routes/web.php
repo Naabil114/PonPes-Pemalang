@@ -6,6 +6,7 @@ use App\Http\Controllers\SantriController;
 use App\Http\Controllers\MadrasahController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KomponenSppController;
+use App\Http\Controllers\PenagihanSantriController;
 use App\Http\Controllers\PilihanMakanSantriController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -49,6 +50,11 @@ Route::get('create/pilih/makan/santri',[PilihanMakanSantriController::class,'cre
 Route::post('store/pilih/makan/santri', action: [PilihanMakanSantriController::class, 'store'])->name('pilihan-makan-santri.store');
 Route::get('edit/pilih/makan/santri/{id}',[PilihanMakanSantriController::class,'edit'])->name('pilihan-makan-santri.edit');
 Route::put('update/pilih/makan/santri/{id}', [PilihanMakanSantriController::class, 'update'])->name('pilihan-makan-santri.update');
+
+Route::get('data/penagihan/santri',[PenagihanSantriController::class,'index'])->name('penagihan-santri.index');
+Route::get('create/penagihan/santri/{id}',[PenagihanSantriController::class,'generateTagihan'])->name('penagihan-santri.create');
+Route::post('/penagihan-santri/generate-all', [PenagihanSantriController::class, 'generateAllTagihan'])->name('penagihan-santri.generate-all');
+
 
 
 
