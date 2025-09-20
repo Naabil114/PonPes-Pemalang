@@ -5,6 +5,7 @@ use App\Http\Controllers\KamarController;
 use App\Http\Controllers\SantriController;
 use App\Http\Controllers\MadrasahController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KomponenSppController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
@@ -34,6 +35,13 @@ Route::get('create/madrasah',[MadrasahController::class,'create'])->name('madras
 Route::post('store/madrasah', [MadrasahController::class, 'store'])->name('madrasah.store');
 Route::get('edit/madrasah/{id}',[MadrasahController::class,'edit'])->name('madrasah.edit');
 Route::put('update/madrasah/{id}', [MadrasahController::class, 'update'])->name('madrasah.update');
+
+Route::get('data/komponen_spp',[KomponenSppController::class,'index'])->name('komponen_spp.index');
+Route::get('create/komponen_spp',[KomponenSppController::class,'create'])->name('komponen_spp.create');
+Route::post('store/komponen_spp', [KomponenSppController::class, 'store'])->name('komponen_spp.store');
+Route::get('edit/komponen_spp/{id}',[KomponenSppController::class,'edit'])->name('komponen_spp.edit');
+Route::put('update/komponen_spp/{id}', [KomponenSppController::class, 'update'])->name('komponen_spp.update');
+Route::delete('destroy/komponen_spp/{id}', [KomponenSppController::class, 'destroy'])->name('komponen_spp.destroy');
 
 
 
