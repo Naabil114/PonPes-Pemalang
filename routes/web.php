@@ -8,6 +8,7 @@ use App\Http\Controllers\SantriController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MadrasahController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\KomponenSppController;
 use App\Http\Controllers\TagihanSantriController;
 use App\Http\Controllers\PenagihanSantriController;
@@ -23,6 +24,16 @@ Route::get('/login',[AuthController::class,'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
+
+
+Route::get('/santri/tagihan/pembayaran',[TagihanSantriController::class,'tagihanSantri'])->name('tagihan.pembayaran.santri.index');
+Route::get('/santri/tagihan/{id}', [TagihanSantriController::class, 'showTagihan'])->name('santri.tagihan.show');
+
+Route::get('/santri/tagihan/{id}/bayar', [PembayaranController::class, 'create'])->name('santri.pembayaran.create');
+
+Route::post('/santri/tagihan/{id}/bayar', [PembayaranController::class, 'store'])->name('santri.pembayaran.store');
+
+
 
 
 Route::get('data/santri',[SantriController::class,'index'])->name('santri.index');
@@ -71,6 +82,9 @@ Route::get('create/user',[UserController::class,'create'])->name('user.create');
 Route::post('store/user',[UserController::class,'store'])->name('user.store');
 Route::get('edit/user/{id}',[UserController::class,'edit'])->name('user.edit');
 Route::put('update/user/{id}',[UserController::class,'update'])->name('user.update');
+
+Route::put('/pembayaran/{id}/lunas', [PembayaranController::class, 'setLunas'])->name('pembayaran.lunas');
+Route::put('/pembayaran/{id}/tolak', [PembayaranController::class, 'setTolak'])->name('pembayaran.tolak');
 
 
 
