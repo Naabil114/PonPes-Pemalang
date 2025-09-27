@@ -27,95 +27,83 @@
                                 <h4 class="card-title">Data Santri</h4>
                                 <div class="ms-auto">
                                     <a href="{{ route('santri.create') }}">
-                                    <button class="btn btn-primary btn-round ms-auto">
-                                        <i class="fa fa-plus"></i>
-                                        Tambah Santri
-                                    </button>
-                                </a>
+                                        <button class="btn btn-primary btn-round ms-auto">
+                                            <i class="fa fa-plus"></i>
+                                            Tambah Santri
+                                        </button>
+                                    </a>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive mt-3">
                                 <table id="add-row" class="display table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>NIS</th>
-            <th>Nama</th>
-            <th>Tempat Lahir</th>
-            <th>Tanggal Lahir</th>
-            <th>Jenis Kelamin</th>
-            <th>Nama Ortu</th>
-            <th>No Tlp</th>
-            <th>Alamat</th>
-            <th>Kelas</th> <!-- Madrasah -->
-            <th>Kamar</th> <!-- Kamar -->
-            <th>Tanggal Daftar</th>
-            <th>Status Santri</th>
-            <th style="width: 12%">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @forelse ($data as $item)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $item->nis }}</td>
-                <td>{{ $item->nama_santri }}</td>
-                <td>{{ $item->tempat_lahir }}</td>
-                <td>{{ $item->tanggal_lahir }}</td>
-                <td>{{ $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
-                <td>{{ $item->nama_orang_tua }}</td>
-                <td>{{ $item->no_telp }}</td>
-                <td>{{ $item->alamat }}</td>
-                <td>{{ $item->madrasah->nama_madrasah ?? '-' }}</td> <!-- ambil nama madrasah -->
-                <td>{{ $item->kamar->nama_kamar ?? '-' }}</td>       <!-- ambil nama kamar -->
-                <td>{{ $item->tanggal_daftar }}</td>
-                <td>
-                    @if ($item->status_santri == 'pendaftar')
-                        <span class="badge bg-secondary">Pendaftar</span>
-                    @elseif ($item->status_santri == 'aktif')
-                        <span class="badge bg-success">Aktif</span>
-                    @elseif ($item->status_santri == 'alumni')
-                        <span class="badge bg-info">Alumni</span>
-                    @elseif ($item->status_santri == 'keluar')
-                        <span class="badge bg-danger">Keluar</span>
-                    @endif
-                </td>
-                <td>
-                    <div class="form-button-action d-flex gap-2">
-                        <!-- Tombol Detail -->
-                        <a href="{{ route('santri.show', $item->id_santri) }}">
-                            <button class="btn btn-success btn-sm">Detail</button>
-                        </a>
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>NIS</th>
+                                            <th>Nama</th>
+                                            <th>Jenis Kelamin</th>
+                                            <th>Kelas</th> <!-- Madrasah -->
+                                            <th>Kamar</th> <!-- Kamar -->
+                                            <th>Status Santri</th>
+                                            <th style="width: 12%">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($data as $item)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $item->nis }}</td>
+                                                <td>{{ $item->nama_santri }}</td>
+                                                <td>{{ $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
+                                                <td>{{ $item->madrasah->nama_madrasah ?? '-' }}</td>
+                                                <td>{{ $item->kamar->nama_kamar ?? '-' }}</td> <!-- ambil nama kamar -->
+                                                <td>{{ $item->tanggal_daftar }}</td>
+                                                <td>
+                                                    @if ($item->status_santri == 'pendaftar')
+                                                        <span class="badge bg-secondary">Pendaftar</span>
+                                                    @elseif ($item->status_santri == 'aktif')
+                                                        <span class="badge bg-success">Aktif</span>
+                                                    @elseif ($item->status_santri == 'alumni')
+                                                        <span class="badge bg-info">Alumni</span>
+                                                    @elseif ($item->status_santri == 'keluar')
+                                                        <span class="badge bg-danger">Keluar</span>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <div class="form-button-action d-flex gap-2">
+                                                        <!-- Tombol Detail -->
+                                                        <a href="{{ route('santri.show', $item->id_santri) }}">
+                                                            <button class="btn btn-success btn-sm">Detail</button>
+                                                        </a>
 
-                        <!-- Tombol Edit -->
-                        <a href="{{ route('santri.edit', $item->id_santri) }}">
-                            <button class="btn btn-warning btn-sm">Edit</button>
-                        </a>
+                                                        <!-- Tombol Edit -->
+                                                        <a href="{{ route('santri.edit', $item->id_santri) }}">
+                                                            <button class="btn btn-warning btn-sm">Edit</button>
+                                                        </a>
 
-                        <!-- Tombol Hapus -->
-                        <form action="{{ route('santri.destroy', $item->id_santri) }}"
-      method="POST"
-      class="d-inline form-delete">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="btn btn-danger btn-sm">
-        Hapus
-    </button>
-</form>
+                                                        <!-- Tombol Hapus -->
+                                                        <form action="{{ route('santri.destroy', $item->id_santri) }}"
+                                                            method="POST" class="d-inline form-delete">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                                Hapus
+                                                            </button>
+                                                        </form>
 
-                    </div>
-                </td>
-            </tr>
-        @empty
-            <tr>
-                <td colspan="14" class="text-center">Data santri tidak tersedia</td>
-            </tr>
-        @endforelse
-    </tbody>
-</table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="14" class="text-center">Data santri tidak tersedia</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
 
                             </div>
 
@@ -183,12 +171,12 @@
     });
 </script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         // Ambil semua form dengan class form-delete
         const deleteForms = document.querySelectorAll('.form-delete');
 
         deleteForms.forEach(form => {
-            form.addEventListener('submit', function (e) {
+            form.addEventListener('submit', function(e) {
                 e.preventDefault(); // Stop form dari submit langsung
 
                 Swal.fire({

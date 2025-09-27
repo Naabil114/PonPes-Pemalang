@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Santri;
+use App\Models\TagihanSpp;
+use Illuminate\Http\Request;
+
+class TagihanSantriController extends Controller
+{
+    public function index()
+    {
+        $tagihan = TagihanSpp::with('santri')->get();
+        // dd($tagihan);
+    return view('admin.data-tagihan.index', compact('tagihan'));
+    }
+
+    public function show($id_santri)
+{
+    $santri = Santri::with(['madrasah', 'kamar'])->findOrFail($id_santri);
+
+    $penagihan = TagihanSpp::where('id_santri', $id_santri)->get();
+
+    return view('admin.data-tagihan.show', compact('santri', 'penagihan'));
+}
+
+}

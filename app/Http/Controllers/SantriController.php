@@ -15,7 +15,7 @@ class SantriController extends Controller
     public function index()
     {
         // Ambil santri beserta madrasah & kamar
-        $data = Santri::with(['madrasah', 'kamar'])->get();
+        $data = Santri::with(['madrasah', 'kamar',])->get();
 
         return view('admin.santri.index', compact('data'));
     }
