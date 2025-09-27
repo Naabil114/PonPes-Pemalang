@@ -31,7 +31,6 @@
                                             <th>No</th>
                                             <th>Tagihan</th>
                                             <th>Nama Santri</th>
-                                            <th>Nomor Telp</th>
                                             <th>Status Tagihan</th>
                                             <th style="width: 12%">Action</th>
                                         </tr>
@@ -44,17 +43,7 @@
                                                 </td>
 
                                                 <td>{{ $item->santri->nama_santri }}</td>
-                                                <td>
-                                                    @if ($item->santri->no_telp)
-                                                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $item->santri->no_telp) }}"
-                                                            target="_blank" class="text-success" title="Chat via WhatsApp">
-                                                            <i class="fab fa-whatsapp fa-lg"></i>
-                                                            {{ $item->santri->no_telp }}
-                                                        </a>
-                                                    @else
-                                                        -
-                                                    @endif
-                                                </td>
+                                                
 
                                                 <td>
                                                     @if ($item->status_tagihan == 'belum_bayar')
@@ -71,7 +60,7 @@
 
                                                 <td>
                                                     <div class="form-button-action d-flex gap-2">
-                                                        <a href="{{ route('penagihan-santri.show', $item->id_santri) }}"
+                                                        <a href="{{ route('santri.tagihan.show', $item->id_santri) }}"
                                                             class="btn btn-info btn-sm">
                                                             Detail
                                                         </a>
@@ -81,7 +70,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="14" class="text-center">Data pilih makan tidak tersedia</td>
+                                                <td colspan="14" class="text-center">Data pilih tagihan tidak tersedia</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
@@ -149,6 +138,31 @@
                     previous: "‹"
                 }
             }
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const formTagihSemua = document.getElementById('form-tagih-semua');
+        const btnTagihSemua = document.getElementById('btn-tagih-semua');
+
+        btnTagihSemua.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Semua santri yang belum ditagih bulan ini akan dibuatkan tagihan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Tagih Semua',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    formTagihSemua.submit();
+                }
+            });
         });
     });
 </script>
