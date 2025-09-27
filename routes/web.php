@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\SantriController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MadrasahController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KomponenSppController;
@@ -12,10 +14,12 @@ use App\Http\Controllers\PenagihanSantriController;
 use App\Http\Controllers\PilihanMakanSantriController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
+Route::get('/',[LandingController::class,'index'])->name('/');
+Route::get('/login',[AuthController::class,'index'])->name('login');
 Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
 
 

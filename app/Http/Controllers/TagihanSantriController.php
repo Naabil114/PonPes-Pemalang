@@ -15,13 +15,19 @@ class TagihanSantriController extends Controller
     return view('admin.data-tagihan.index', compact('tagihan'));
     }
 
-    public function show($id_santri)
+   public function show($id_santri)
 {
     $santri = Santri::with(['madrasah', 'kamar'])->findOrFail($id_santri);
 
-    $penagihan = TagihanSpp::where('id_santri', $id_santri)->get();
+    $penagihan = TagihanSpp::with('pembayaran')
+        ->where('id_santri', $id_santri)
+        ->get();
 
     return view('admin.data-tagihan.show', compact('santri', 'penagihan'));
 }
+
+
+
+
 
 }
