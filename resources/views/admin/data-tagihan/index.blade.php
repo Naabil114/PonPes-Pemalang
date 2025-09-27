@@ -14,7 +14,7 @@
                         <i class="icon-arrow-right"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Data penagihan</a>
+                        <a href="#">Data tagihan</a>
                     </li>
 
                 </ul>
@@ -22,51 +22,62 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="d-flex align-items-center">
-                                <div class="ms-auto">
-                                    <form action="{{ route('penagihan-santri.generate-all') }}" method="POST"
-                                        id="form-tagih-semua">
-                                        @csrf
-                                        <button type="button" class="btn btn-info " id="btn-tagih-semua">
-                                             Tagih Semua
-                                        </button>
-                                    </form>
-
-
-                                </div>
-
-                            </div>
-                        </div>
+                        
                         <div class="card-body">
                             <div class="table-responsive mt-3">
                                 <table id="add-row" class="display table table-striped table-hover">
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>NIS</th>
+                                            <th>Tagihan</th>
                                             <th>Nama Santri</th>
-                                            <th>Madrasah</th>
-                                            <th>Kamar</th>
+                                            <th>Nomor Telp</th>
+                                            <th>Status Tagihan</th>
                                             <th style="width: 12%">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($data as $item)
+                                        @forelse ($tagihan as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->nis }}</td>
-                                                <td>{{ $item->nama_santri }}</td>
-                                                <td>{{ $item->madrasah->nama_madrasah }}</td>
-                                                <td>{{ $item->kamar->nama_kamar }}</td>
+                                                <td>{{ \Carbon\Carbon::createFromDate($item->tahun, $item->bulan, 1)->translatedFormat('F Y') }}
+                                                </td>
+
+                                                <td>{{ $item->santri->nama_santri }}</td>
+                                                <td>
+                                                    @if ($item->santri->no_telp)
+                                                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $item->santri->no_telp) }}"
+                                                            target="_blank" class="text-success" title="Chat via WhatsApp">
+                                                            <i class="fab fa-whatsapp fa-lg"></i>
+                                                            {{ $item->santri->no_telp }}
+                                                        </a>
+                                                    @else
+                                                        -
+                                                    @endif
+                                                </td>
+
+                                                <td>
+                                                    @if ($item->status_tagihan == 'belum_bayar')
+                                                        <span class="badge bg-danger">Belum Bayar</span>
+                                                    @elseif ($item->status_tagihan == 'pending_verifikasi')
+                                                        <span class="badge bg-warning text-dark">Pending Verifikasi</span>
+                                                    @elseif ($item->status_tagihan == 'lunas')
+                                                        <span class="badge bg-success">Lunas</span>
+                                                    @elseif ($item->status_tagihan == 'terlambat')
+                                                        <span class="badge bg-secondary">Terlambat</span>
+                                                    @endif
+                                                </td>
+
 
                                                 <td>
                                                     <div class="form-button-action d-flex gap-2">
-                                                        <a href="{{ route('penagihan-santri.create', $item->id_santri) }}">
-                                                            <button class="btn btn-info btn-sm">Tagih</button>
+                                                        <a href="{{ route('penagihan-santri.show', $item->id_santri) }}"
+                                                            class="btn btn-info btn-sm">
+                                                            Detail
                                                         </a>
                                                     </div>
                                                 </td>
+
                                             </tr>
                                         @empty
                                             <tr>

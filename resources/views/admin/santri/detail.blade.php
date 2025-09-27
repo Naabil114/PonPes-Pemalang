@@ -34,12 +34,24 @@
                             <hr>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
+                                    <strong>Userame:</strong>
+                                    <p>{{ $santri->user->username ?? '-' }}</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
                                     <strong>NIS:</strong>
                                     <p>{{ $santri->nis ?? '-' }}</p>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <strong>Nama Santri:</strong>
                                     <p>{{ $santri->nama_santri }}</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>No Telp Santri:</strong>
+                                    <p>{{ $santri->no_telp }}</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Alamat Santri:</strong>
+                                    <p>{{ $santri->alamat }}</p>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <strong>Tempat Lahir:</strong>

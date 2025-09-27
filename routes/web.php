@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\SantriController;
 use App\Http\Controllers\MadrasahController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KomponenSppController;
+use App\Http\Controllers\TagihanSantriController;
 use App\Http\Controllers\PenagihanSantriController;
 use App\Http\Controllers\PilihanMakanSantriController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -54,6 +56,18 @@ Route::put('update/pilih/makan/santri/{id}', [PilihanMakanSantriController::clas
 Route::get('data/penagihan/santri',[PenagihanSantriController::class,'index'])->name('penagihan-santri.index');
 Route::get('create/penagihan/santri/{id}',[PenagihanSantriController::class,'generateTagihan'])->name('penagihan-santri.create');
 Route::post('/penagihan-santri/generate-all', [PenagihanSantriController::class, 'generateAllTagihan'])->name('penagihan-santri.generate-all');
+
+Route::get('data/tagihan/santri',[TagihanSantriController::class,'index'])->name('tagihan-santri.index');
+Route::get('penagihan-santri/{id_santri}/detail', [TagihanSantriController::class, 'show'])->name('penagihan-santri.show');
+
+Route::get('data/user',[UserController::class,'index'])->name('user.index');
+Route::get('create/user',[UserController::class,'create'])->name('user.create');
+Route::post('store/user',[UserController::class,'store'])->name('user.store');
+Route::get('edit/user/{id}',[UserController::class,'edit'])->name('user.edit');
+Route::put('update/user/{id}',[UserController::class,'update'])->name('user.update');
+
+
+
 
 
 
