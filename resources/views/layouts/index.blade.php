@@ -419,48 +419,54 @@
                                     </div>
                                 </div>
                             </li>
+                            @php
+    $user = Auth::user();
+    $nama = $user->name ?? $user->username;
+    $inisial = collect(explode(' ', $nama))->map(fn($n) => strtoupper(substr($n, 0, 1)))->join('');
+@endphp
+
 
                             <li class="nav-item topbar-user dropdown hidden-caret">
-                                <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
-                                    aria-expanded="false">
-                                    <div class="avatar-sm">
-                                        <img src="{{ asset('assets/img/profile.jpg') }}" alt="..."
-                                            class="avatar-img rounded-circle" />
-                                    </div>
-                                    <span class="profile-username">
-                                        <span class="op-7">Hi,</span>
-                                        <span class="fw-bold">Hizrian</span>
-                                    </span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-user animated fadeIn">
-                                    <div class="dropdown-user-scroll scrollbar-outer">
-                                        <li>
-                                            <div class="user-box">
-                                                <div class="avatar-lg">
-                                                    <img src="{{ asset('assets/img/profile.jpg') }}"
-                                                        alt="image profile" class="avatar-img rounded" />
-                                                </div>
-                                                <div class="u-text">
-                                                    <h4>Hizrian</h4>
-                                                    <p class="text-muted">hello@example.com</p>
-                                                    <a href="profile.html"
-                                                        class="btn btn-xs btn-secondary btn-sm">View Profile</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">My Profile</a>
-                                            <a class="dropdown-item" href="#">My Balance</a>
-                                            <a class="dropdown-item" href="#">Inbox</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Account Setting</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Logout</a>
-                                        </li>
-                                    </div>
-                                </ul>
-                            </li>
+    <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
+        <div class="avatar-sm d-flex align-items-center justify-content-center bg-primary text-white rounded-circle" style="width:40px; height:40px; font-weight:bold;">
+            {{ $inisial }}
+        </div>
+        <span class="profile-username">
+            <span class="op-7">Hi,</span>
+            <span class="fw-bold">{{ $nama }}</span>
+        </span>
+    </a>
+    <ul class="dropdown-menu dropdown-user animated fadeIn">
+        <div class="dropdown-user-scroll scrollbar-outer">
+            <li>
+                <div class="user-box">
+                    <div class="avatar-lg d-flex align-items-center justify-content-center bg-primary text-white rounded" style="width:60px; height:60px; font-size:22px; font-weight:bold;">
+                        {{ $inisial }}
+                    </div>
+                    <div class="u-text">
+                        <h4>{{ $nama }}</h4>
+                        <p class="text-muted">{{ $user->email ?? '-' }}</p>
+                        <a href="" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="">My Profile</a>
+                <a class="dropdown-item" href="#">My Balance</a>
+                <a class="dropdown-item" href="#">Inbox</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Account Setting</a>
+                <div class="dropdown-divider"></div>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="dropdown-item">Logout</button>
+                </form>
+            </li>
+        </div>
+    </ul>
+</li>
+
                         </ul>
                     </div>
                 </nav>
