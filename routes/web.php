@@ -28,9 +28,7 @@ Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
 
 Route::get('/santri/tagihan/pembayaran',[TagihanSantriController::class,'tagihanSantri'])->name('tagihan.pembayaran.santri.index');
 Route::get('/santri/tagihan/{id}', [TagihanSantriController::class, 'showTagihan'])->name('santri.tagihan.show');
-
 Route::get('/santri/tagihan/{id}/bayar', [PembayaranController::class, 'create'])->name('santri.pembayaran.create');
-
 Route::post('/santri/tagihan/{id}/bayar', [PembayaranController::class, 'store'])->name('santri.pembayaran.store');
 
 
