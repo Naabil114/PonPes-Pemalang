@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Santri;
 use App\Models\TagihanSpp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TagihanSantriController extends Controller
 {
@@ -28,9 +29,15 @@ class TagihanSantriController extends Controller
 
     public function tagihanSantri()
     {
-        $tagihan = TagihanSpp::with('santri')->get();
+        $user = Auth::user();
+        $santri = $user->santri;
+        $tagihan = TagihanSpp::with('santri')
+            ->where('id_santri', $santri->id_santri)
+            ->get();
+
         return view('santri.tagihan-santri.index', compact('tagihan'));
     }
+
 
     public function showTagihan($id_santri)
     {
