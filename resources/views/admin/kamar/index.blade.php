@@ -66,30 +66,40 @@
                                                     <div class="form-button-action d-flex gap-2">
 
 
+                                                <td>
+                                                    <div class="form-button-action d-flex gap-2">
+                                                        <!-- Tombol Detail -->
+                                                        <a href="{{ route('kamar.show', $item->id_kamar) }}">
+                                                            <button class="btn btn-info btn-sm">Detail</button>
+                                                        </a>
+
                                                         <!-- Tombol Edit -->
                                                         <a href="{{ route('kamar.edit', $item->id_kamar) }}">
                                                             <button class="btn btn-warning btn-sm">Edit</button>
                                                         </a>
-
-
                                                     </div>
                                                 </td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="14" class="text-center">Data kamar tidak tersedia</td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
+
+
 
                             </div>
+                            </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="14" class="text-center">Data kamar tidak tersedia</td>
+                            </tr>
+                            @endforelse
+                            </tbody>
+                            </table>
 
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection
 
