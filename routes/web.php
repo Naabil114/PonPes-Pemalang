@@ -47,6 +47,10 @@ Route::get('create/kamar',[KamarController::class,'create'])->name('kamar.create
 Route::post('store/kamar', [KamarController::class, 'store'])->name('kamar.store');
 Route::get('edit/kamar/{id}',[KamarController::class,'edit'])->name('kamar.edit');
 Route::put('update/kamar/{id}', [KamarController::class, 'update'])->name('kamar.update');
+Route::get('/kamar/{id}', [KamarController::class, 'show'])->name('kamar.show');
+Route::get('/kamar/{id}/cetak-pdf', [KamarController::class, 'cetakPdf'])->name('kamar.cetakPdf');
+
+
 
 
 Route::get('data/madrasah',[MadrasahController::class,'index'])->name('madrasah.index');

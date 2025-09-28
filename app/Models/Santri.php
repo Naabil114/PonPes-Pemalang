@@ -13,9 +13,19 @@ class Santri extends Model
     protected $primaryKey = 'id_santri';
 
     protected $fillable = [
-        'user_id', 'nis', 'nama_santri', 'tempat_lahir', 'tanggal_lahir',
-        'jenis_kelamin', 'nama_orang_tua', 'no_telp', 'alamat',
-        'id_madrasah', 'id_kamar', 'status_santri', 'tanggal_daftar'
+        'user_id',
+        'nis',
+        'nama_santri',
+        'tempat_lahir',
+        'tanggal_lahir',
+        'jenis_kelamin',
+        'nama_orang_tua',
+        'no_telp',
+        'alamat',
+        'id_madrasah',
+        'id_kamar',
+        'status_santri',
+        'tanggal_daftar'
     ];
 
     public function user()
@@ -42,6 +52,13 @@ class Santri extends Model
     {
         return $this->hasMany(PilihanMakanSantri::class, 'id_santri');
     }
+    // Santri.php
+    public function pilihanMakanTerbaru()
+    {
+        return $this->hasOne(PilihanMakanSantri::class, 'id_santri', 'id_santri')
+            ->latestOfMany('tanggal_pilih'); // ambil berdasarkan tanggal_pilih terbaru
+    }
+
 
     public function tagihanSpp()
     {
