@@ -101,6 +101,12 @@
                                 <p>Data Madrasah</p>
                             </a>
                         </li>
+                        <li class="nav-item {{ request()->routeIs('pendaftaran.index') ? 'active' : '' }}">
+                            <a href="{{ route('pendaftaran.index') }}">
+                                <i class="far fa-building"></i>
+                                <p>Pendafataran</p>
+                            </a>
+                        </li>
                         <li class="nav-item {{ request()->routeIs('kamar.index') ? 'active' : '' }}">
                             <a href="{{ route('kamar.index') }}">
                                 <i class="fas fa-bed"></i>

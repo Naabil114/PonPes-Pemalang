@@ -59,7 +59,7 @@
             </div>
             <div class="col-lg-4 text-center text-lg-end">
                 <div class="d-inline-flex align-items-center" style="height: 45px;">
-                    <a href="#"><small class="me-3 text-dark"><i
+                    <a href="{{ route('santri.pendaftaran.form') }}"><small class="me-3 text-dark"><i
                                 class="fa fa-user text-primary me-2"></i>Register</small></a>
                     <a href="#"><small class="me-3 text-dark"><i
                                 class="fa fa-sign-in-alt text-primary me-2"></i>Login</small></a>

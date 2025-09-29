@@ -10,6 +10,7 @@ use App\Http\Controllers\MadrasahController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\KomponenSppController;
+use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\TagihanSantriController;
 use App\Http\Controllers\PenagihanSantriController;
 use App\Http\Controllers\PilihanMakanSantriController;
@@ -95,9 +96,29 @@ Route::put('/pembayaran/{id}/tolak', [PembayaranController::class, 'setTolak'])-
 
 
 
+// Route Pendaftaran
+
+Route::get('santri/pendaftaran/form',[PendaftaranController::class,'pendaftaranForm'])->name('santri.pendaftaran.form');
+Route::post('santri/pendaftaran/submit',[PendaftaranController::class,'submitPendaftaran'])->name('santri.pendaftaran.submit');
 
 
+Route::prefix('pendaftaran')->group(function () {
+    Route::get('/', [PendaftaranController::class, 'index'])->name('pendaftaran.index');
+    Route::get('/{id}', [PendaftaranController::class, 'show'])->name('pendaftaran.show');
+    Route::put('/terima/{id}', [PendaftaranController::class, 'terima'])->name('pendaftaran.terima');
+    Route::put('/tolak/{id}', [PendaftaranController::class, 'tolak'])->name('pendaftaran.tolak');
+});
 
+Route::get('/registrasi/berhasil', function () {
+    $nomorAdmin = '6281234567890'; 
+    
+    $pesanDefault = "Assalamualaikum Admin, saya telah berhasil mendaftar sebagai santri. Mohon informasi untuk proses selanjutnya. Terima kasih.";
 
+    $pesanWhatsApp = urlencode($pesanDefault);
 
+    return view('auth.registrasi-berhasil', [
+        'nomorAdmin' => $nomorAdmin,
+        'pesanWhatsApp' => $pesanWhatsApp
+    ]);
+})->name('register.success');
 
