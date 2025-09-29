@@ -85,8 +85,7 @@ class KamarController extends Controller
 
     public function show($id)
     {
-        $kamar = Kamar::with(['santri.pilihanMakanTerbaru', 'santri.tagihanSpp'])
-            ->findOrFail($id);
+        $kamar = Kamar::with(['santri.pilihanMakanTerbaru', 'santri.tagihanSpp'])->findOrFail($id);
         return view('admin.kamar.show', compact('kamar'));
 
 

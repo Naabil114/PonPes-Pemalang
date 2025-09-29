@@ -66,6 +66,9 @@
                                                     <div class="form-button-action d-flex gap-2">
 
 
+                                                        <a href="{{ route('madrasah.show', $item->id_madrasah) }}">
+                                                            <button class="btn btn-info btn-sm">Detail</button>
+                                                        </a>
                                                         <!-- Tombol Edit -->
                                                         <a href="{{ route('madrasah.edit', $item->id_madrasah) }}">
                                                             <button class="btn btn-warning btn-sm">Edit</button>

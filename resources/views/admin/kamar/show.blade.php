@@ -31,6 +31,7 @@
                     <h5>Daftar Santri di Kamar Ini</h5>
                     @forelse($kamar->santri as $santri)
                         <div class="border rounded p-3 mb-3">
+                            <p><strong>NIS:</strong> {{ $santri->nis }}</p>
                             <p><strong>Nama:</strong> {{ $santri->nama_santri }}</p>
                             <p><strong>Pilihan Makan:</strong>
                                 {{ $santri->pilihanMakanTerbaru->jenis_makan ?? 'Belum dipilih' }}
