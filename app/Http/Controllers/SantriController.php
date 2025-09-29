@@ -63,7 +63,7 @@ class SantriController extends Controller
         ]);
 
         // Hitung jumlah santri aktif (tidak terhapus)
-        $jumlahSantri = Santri::whereNull('deleted_at')->count();
+        $jumlahSantri = Santri::count();
 
         // Generate NIS baru (misal 00001, 00002, dst)
         $nisBaru = str_pad($jumlahSantri + 1, 5, '0', STR_PAD_LEFT);
