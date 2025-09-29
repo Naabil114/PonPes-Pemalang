@@ -42,6 +42,7 @@
         <thead>
             <tr>
                 <th>No</th>
+                <th>NIS</th>
                 <th>Nama Santri</th>
                 <th>Pilihan Makan</th>
                 <th>Total Tagihan</th>
@@ -59,6 +60,7 @@
                 @endphp
                 <tr>
                     <td>{{ $index + 1 }}</td>
+                    <td>{{ $santri->nis }}</td>
                     <td>{{ $santri->nama_santri }}</td>
                     <td>{{ $santri->pilihanMakanTerbaru->jenis_makan ?? 'Belum dipilih' }}</td>
                     <td>Rp {{ number_format($tagihanSantri, 0, ',', '.') }}</td>

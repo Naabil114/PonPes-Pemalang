@@ -34,6 +34,7 @@ Route::post('/santri/tagihan/{id}/bayar', [PembayaranController::class, 'store']
 
 
 
+
 Route::get('data/santri',[SantriController::class,'index'])->name('santri.index');
 Route::get('create/santri',[SantriController::class,'create'])->name('santri.create');
 Route::post('store/santri', [SantriController::class, 'store'])->name('santri.store');
@@ -41,6 +42,8 @@ Route::get('edit/santri/{id}',[SantriController::class,'edit'])->name('santri.ed
 Route::put('update/santri/{id}', [SantriController::class, 'update'])->name('santri.update');
 Route::delete('delete/santri/{id}', [SantriController::class, 'destroy'])->name('santri.destroy');
 Route::get('detail/santri/{id}', [SantriController::class, 'show'])->name('santri.show');
+Route::get('/santri/cetak-pdf', [SantriController::class, 'cetakPdf'])->name('santri.cetakPdf');
+
 
 Route::get('data/kamar',[KamarController::class,'index'])->name('kamar.index');
 Route::get('create/kamar',[KamarController::class,'create'])->name('kamar.create');
@@ -58,6 +61,8 @@ Route::get('create/madrasah',[MadrasahController::class,'create'])->name('madras
 Route::post('store/madrasah', action: [MadrasahController::class, 'store'])->name('madrasah.store');
 Route::get('edit/madrasah/{id}',[MadrasahController::class,'edit'])->name('madrasah.edit');
 Route::put('update/madrasah/{id}', [MadrasahController::class, 'update'])->name('madrasah.update');
+Route::get('/madrasah/{id}', [MadrasahController::class, 'show'])->name('madrasah.show');
+
 
 Route::get('data/komponen_spp',[KomponenSppController::class,'index'])->name('komponen_spp.index');
 Route::get('create/komponen_spp',[KomponenSppController::class,'create'])->name('komponen_spp.create');

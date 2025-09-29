@@ -7,6 +7,7 @@ use App\Models\Kamar;
 use App\Models\Santri;
 use App\Models\Madrasah;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -18,6 +19,17 @@ class SantriController extends Controller
         $data = Santri::with(['madrasah', 'kamar',])->get();
 
         return view('admin.santri.index', compact('data'));
+    }
+    public function cetakPdf()
+    {
+        // Ambil data santri dengan relasi
+        $data = Santri::with(['madrasah', 'kamar'])->get();
+
+        // Load view khusus PDF
+        $pdf = Pdf::loadView('admin.santri.cetak-pdf', compact('data'));
+
+        // Stream langsung ke browser (bisa juga download pakai ->download())
+        return $pdf->stream('data-santri.pdf');
     }
 
 

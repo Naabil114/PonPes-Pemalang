@@ -25,15 +25,19 @@
                         <div class="card-header">
                             <div class="d-flex align-items-center">
                                 <h4 class="card-title">Data Santri</h4>
-                                <div class="ms-auto">
+
+                                <div class="ms-auto d-flex gap-2">
                                     <a href="{{ route('santri.create') }}">
-                                        <button class="btn btn-primary btn-round ms-auto">
-                                            <i class="fa fa-plus"></i>
-                                            Tambah Santri
+                                        <button class="btn btn-primary btn-round">
+                                            <i class="fa fa-plus"></i> Tambah Santri
+                                        </button>
+                                    </a>
+                                    <a href="{{ route('santri.cetakPdf') }}" target="_blank">
+                                        <button class="btn btn-danger btn-round">
+                                            <i class="fa fa-file-pdf"></i> Cetak PDF
                                         </button>
                                     </a>
                                 </div>
-
                             </div>
                         </div>
                         <div class="card-body">
@@ -45,8 +49,8 @@
                                             <th>NIS</th>
                                             <th>Nama</th>
                                             <th>Jenis Kelamin</th>
-                                            <th>Kelas</th> <!-- Madrasah -->
-                                            <th>Kamar</th> <!-- Kamar -->
+                                            <th>Madrasah</th>
+                                            <th>Kamar</th>
                                             <th>Status Santri</th>
                                             <th style="width: 12%">Action</th>
                                         </tr>
@@ -59,7 +63,7 @@
                                                 <td>{{ $item->nama_santri }}</td>
                                                 <td>{{ $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                                 <td>{{ $item->madrasah->nama_madrasah ?? '-' }}</td>
-                                                <td>{{ $item->kamar->nama_kamar ?? '-' }}</td> <!-- ambil nama kamar -->
+                                                <td>{{ $item->kamar->nama_kamar ?? '-' }}</td>
                                                 <td>{{ $item->tanggal_daftar }}</td>
                                                 <td>
                                                     @if ($item->status_santri == 'pendaftar')

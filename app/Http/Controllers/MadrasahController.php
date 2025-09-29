@@ -68,4 +68,10 @@ class MadrasahController extends Controller
 
         return redirect()->route('madrasah.index')->with('success', 'Data madrasah berhasil diperbarui!');
     }
+
+    public function show($id)
+    {
+        $madrasah = Madrasah::with('santri')->findOrFail($id);
+        return view('admin.madrasah.show', compact('madrasah'));
+    }
 }
