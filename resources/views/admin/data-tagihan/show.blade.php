@@ -94,6 +94,27 @@
                                         @endif
                                     </td>
                                 </tr>
+                                @if ($p->status_tagihan !== 'lunas')
+                                    <tr>
+                                        <th>
+
+                                        </th>
+                                        <td class="text-end">
+                                            <form id="formBayarCash-{{ $p->id_tagihan }}"
+                                                action="{{ route('admin.pembayaran.cash', $p->id_tagihan) }}"
+                                                method="POST" style="display:inline;">
+                                                @csrf
+                                                <button type="button" class="btn btn-success btn-sm btn-bayar-cash"
+                                                    data-id="{{ $p->id_tagihan }}"
+                                                    data-nama="{{ $p->santri->nama_santri }}">
+                                                    <i class="fas fa-money-bill-wave me-1"></i> Bayar Cash
+                                                </button>
+                                            </form>
+
+                                        </td>
+
+                                    </tr>
+                                @endif
                             </table>
 
                             {{-- Detail Pembayaran --}}
@@ -101,141 +122,145 @@
                             @if ($p->pembayaran->isEmpty())
                                 <p class="text-muted">Belum ada pembayaran.</p>
                             @else
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-sm">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th>Tanggal Bayar</th>
-                                            <th>Jumlah Bayar</th>
-                                            <th>Metode</th>
-                                            <th>Bank Pengirim</th>
-                                            <th>Nama Pengirim</th>
-                                            <th>Bukti Pembayaran</th>
-                                            <th>Status Verifikasi</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($p->pembayaran as $bayar)
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-sm">
+                                        <thead class="table-light">
                                             <tr>
-                                                <td>{{ \Carbon\Carbon::parse($bayar->tanggal_bayar)->translatedFormat('d F Y') }}
-                                                </td>
-                                                <td>Rp {{ number_format($bayar->jumlah_bayar, 0, ',', '.') }}</td>
-                                                <td>{{ $bayar->metode_pembayaran }}</td>
-                                                <td>{{ $bayar->bank_pengirim ?? '-' }}</td>
-                                                <td>{{ $bayar->nama_pengirim ?? '-' }}</td>
-                                                <td>
-                                                    @if ($bayar->bukti_pembayaran)
-                                                        <button class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                                            data-bs-target="#buktiModal{{ $bayar->id_pembayaran }}">
-                                                            Lihat Bukti
-                                                        </button>
-
-                                                        <!-- Modal Bukti -->
-                                                        <div class="modal fade" id="buktiModal{{ $bayar->id_pembayaran }}"
-                                                            tabindex="-1"
-                                                            aria-labelledby="buktiModalLabel{{ $bayar->id_pembayaran }}"
-                                                            aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title">Bukti Pembayaran</h5>
-                                                                        <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body text-center">
-                                                                        <img src="{{ asset('storage/' . $bayar->bukti_pembayaran) }}"
-                                                                            alt="Bukti Pembayaran"
-                                                                            class="img-fluid rounded">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @else
-                                                        <span class="text-muted">Tidak ada</span>
-                                                    @endif
-                                                </td>
-
-                                                <td>
-                                                    @if ($bayar->status_verifikasi == 'pending')
-                                                        <span class="badge bg-warning text-dark">Pending</span>
-                                                    @elseif ($bayar->status_verifikasi == 'diverifikasi')
-                                                        <span class="badge bg-success">Diterima</span>
-                                                    @elseif ($bayar->status_verifikasi == 'ditolak')
-                                                        <span class="badge bg-danger">Ditolak</span>
-                                                    @else
-                                                        <span class="badge bg-secondary">-</span>
-                                                    @endif
-                                                </td>
-
-                                                <td>
-                                                    @if ($bayar->status_verifikasi == 'pending')
-                                                        <div class="d-flex gap-1">
-                                                            <!-- Tombol Lunas -->
-                                                            <form id="form-lunas-{{ $bayar->id_pembayaran }}"
-                                                                action="{{ route('pembayaran.lunas', $bayar->id_pembayaran) }}"
-                                                                method="POST" class="d-inline">
-                                                                @csrf
-                                                                @method('PUT')
-                                                                <button type="button"
-                                                                    class="btn btn-success btn-sm btn-lunas"
-                                                                    data-id="{{ $bayar->id_pembayaran }}">
-                                                                    Lunas
-                                                                </button>
-                                                            </form>
-
-                                                            <!-- Tombol Tolak -->
-                                                            <form id="form-tolak-{{ $bayar->id_pembayaran }}"
-                                                                action="{{ route('pembayaran.tolak', $bayar->id_pembayaran) }}"
-                                                                method="POST" class="d-inline">
-                                                                @csrf
-                                                                @method('PUT')
-                                                                <button type="button" class="btn btn-danger btn-sm"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#tolakModal{{ $bayar->id_pembayaran }}">
-                                                                    Tolak </button>
-                                                            </form>
-                                                        </div>
-                                                    @endif
-                                                </td>
+                                                <th>Tanggal Bayar</th>
+                                                <th>Jumlah Bayar</th>
+                                                <th>Metode</th>
+                                                <th>Bank Pengirim</th>
+                                                <th>Nama Pengirim</th>
+                                                <th>Bukti Pembayaran</th>
+                                                <th>Status Verifikasi</th>
+                                                <th>Aksi</th>
                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($p->pembayaran as $bayar)
+                                                <tr>
+                                                    <td>{{ \Carbon\Carbon::parse($bayar->tanggal_bayar)->translatedFormat('d F Y') }}
+                                                    </td>
+                                                    <td>Rp {{ number_format($bayar->jumlah_bayar, 0, ',', '.') }}</td>
+                                                    <td>{{ $bayar->metode_pembayaran }}</td>
+                                                    <td>{{ $bayar->bank_pengirim ?? '-' }}</td>
+                                                    <td>{{ $bayar->nama_pengirim ?? '-' }}</td>
+                                                    <td>
+                                                        @if ($bayar->bukti_pembayaran)
+                                                            <button class="btn btn-sm btn-info" data-bs-toggle="modal"
+                                                                data-bs-target="#buktiModal{{ $bayar->id_pembayaran }}">
+                                                                Lihat Bukti
+                                                            </button>
 
-                                            <!-- Modal Tolak -->
-                                            <div class="modal fade" id="tolakModal{{ $bayar->id_pembayaran }}"
-                                                tabindex="-1" aria-labelledby="tolakModalLabel{{ $bayar->id_pembayaran }}"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <form action="{{ route('pembayaran.tolak', $bayar->id_pembayaran) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">Tolak Pembayaran</h5>
-                                                                <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="mb-3">
-                                                                    <label for="keterangan" class="form-label">Keterangan
-                                                                        Penolakan</label>
-                                                                    <textarea name="keterangan" id="keterangan" rows="3" class="form-control" required></textarea>
+                                                            <!-- Modal Bukti -->
+                                                            <div class="modal fade"
+                                                                id="buktiModal{{ $bayar->id_pembayaran }}" tabindex="-1"
+                                                                aria-labelledby="buktiModalLabel{{ $bayar->id_pembayaran }}"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">Bukti Pembayaran</h5>
+                                                                            <button type="button" class="btn-close"
+                                                                                data-bs-dismiss="modal"
+                                                                                aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body text-center">
+                                                                            <img src="{{ asset('storage/' . $bayar->bukti_pembayaran) }}"
+                                                                                alt="Bukti Pembayaran"
+                                                                                class="img-fluid rounded">
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Batal</button>
-                                                                <button type="submit" class="btn btn-danger">Tolak</button>
+                                                        @else
+                                                            <span class="text-muted">Tidak ada</span>
+                                                        @endif
+                                                    </td>
+
+                                                    <td>
+                                                        @if ($bayar->status_verifikasi == 'pending')
+                                                            <span class="badge bg-warning text-dark">Pending</span>
+                                                        @elseif ($bayar->status_verifikasi == 'diverifikasi')
+                                                            <span class="badge bg-success">Diterima</span>
+                                                        @elseif ($bayar->status_verifikasi == 'ditolak')
+                                                            <span class="badge bg-danger">Ditolak</span>
+                                                        @else
+                                                            <span class="badge bg-secondary">-</span>
+                                                        @endif
+                                                    </td>
+
+                                                    <td>
+                                                        @if ($bayar->status_verifikasi == 'pending')
+                                                            <div class="d-flex gap-1">
+                                                                <!-- Tombol Lunas -->
+                                                                <form id="form-lunas-{{ $bayar->id_pembayaran }}"
+                                                                    action="{{ route('pembayaran.lunas', $bayar->id_pembayaran) }}"
+                                                                    method="POST" class="d-inline">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <button type="button"
+                                                                        class="btn btn-success btn-sm btn-lunas"
+                                                                        data-id="{{ $bayar->id_pembayaran }}">
+                                                                        Lunas
+                                                                    </button>
+                                                                </form>
+
+                                                                <!-- Tombol Tolak -->
+                                                                <form id="form-tolak-{{ $bayar->id_pembayaran }}"
+                                                                    action="{{ route('pembayaran.tolak', $bayar->id_pembayaran) }}"
+                                                                    method="POST" class="d-inline">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <button type="button" class="btn btn-danger btn-sm"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#tolakModal{{ $bayar->id_pembayaran }}">
+                                                                        Tolak </button>
+                                                                </form>
                                                             </div>
-                                                        </div>
-                                                    </form>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+
+                                                <!-- Modal Tolak -->
+                                                <div class="modal fade" id="tolakModal{{ $bayar->id_pembayaran }}"
+                                                    tabindex="-1"
+                                                    aria-labelledby="tolakModalLabel{{ $bayar->id_pembayaran }}"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <form
+                                                            action="{{ route('pembayaran.tolak', $bayar->id_pembayaran) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Tolak Pembayaran</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="mb-3">
+                                                                        <label for="keterangan"
+                                                                            class="form-label">Keterangan
+                                                                            Penolakan</label>
+                                                                        <textarea name="keterangan" id="keterangan" rows="3" class="form-control" required></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Batal</button>
+                                                                    <button type="submit"
+                                                                        class="btn btn-danger">Tolak</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             @endif
                         </div>
                     @endforeach
@@ -244,10 +269,39 @@
         </div>
     </div>
 @endsection
+
+@if (session('success'))
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 2000,
+                showClass: {
+                    popup: `
+                    animate__animated
+                    animate__fadeInUp
+                    animate__faster
+                `
+                },
+                hideClass: {
+                    popup: `
+                    animate__animated
+                    animate__fadeOutDown
+                    animate__faster
+                `
+                }
+            });
+        });
+    </script>
+@endif
+
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // konfirmasi Lunas
         document.querySelectorAll(".btn-lunas").forEach(btn => {
             btn.addEventListener("click", function() {
                 let id = this.dataset.id;
@@ -262,6 +316,36 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         document.getElementById("form-lunas-" + id).submit();
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.btn-bayar-cash').forEach(function(button) {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                let id = this.getAttribute('data-id');
+                let nama = this.getAttribute('data-nama');
+
+                Swal.fire({
+                    title: 'Konfirmasi Pembayaran',
+                    text: "Apakah Anda yakin ingin melakukan pembayaran cash untuk santri: " +
+                        nama + "?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, bayar!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('formBayarCash-' + id).submit();
                     }
                 });
             });
