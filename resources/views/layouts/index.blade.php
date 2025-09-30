@@ -76,6 +76,7 @@
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
                 <div class="sidebar-content">
                     <ul class="nav nav-secondary">
+                            @if (Auth::user()->role == 'admin_putra')
                         <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                             <a href="{{ route('dashboard') }}">
                                 <i class="fas fa-home"></i>
@@ -161,7 +162,10 @@
                                 <p>Data User</p>
                             </a>
                         </li>
+                        @endif
 
+                        @if (Auth::user()->role == 'santri')
+                        
                         <li class="nav-section">
                             <span class="sidebar-mini-icon">
                                 <i class="fa fa-ellipsis-h"></i>
@@ -175,6 +179,7 @@
                                 <p>Tagihan</p>
                             </a>
                         </li>
+                        @endif
 
 
                     </ul>
