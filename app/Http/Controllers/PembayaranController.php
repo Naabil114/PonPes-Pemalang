@@ -82,6 +82,43 @@ class PembayaranController extends Controller
 
     }
 
+     public function storeCash(Request $request, $id)
+    {
+        
+
+        $bukti = null;
+
+        
+        $tagihan = TagihanSpp::findOrFail($id);
+        // dd($tagihan);
+        
+
+        PembayaranSpp::create([
+            'id_tagihan' => $id,
+            'jumlah_bayar' => $tagihan->total_tagihan,
+            'tanggal_bayar' => now()->format('Y-m-d'),
+            'bukti_pembayaran' => $bukti,
+            'metode_pembayaran' => 'cash',
+            'bank_pengirim' => 'cash',
+            'nama_pengirim' => 'cash',  
+            'status_verifikasi' => 'diverifikasi',
+            'diverifikasi_oleh' => auth()->user()->id,
+            'tanggal_verifikasi' => now()->format('Y-m-d'),
+        ]);
+        // dd($tagihan);
+
+        // Update status tagihan jadi pending_verifikasi
+        $tagihan->update([
+            'status_tagihan' => 'lunas',
+        ]);
+
+        return redirect()
+            ->route('penagihan-santri.show', $tagihan->id_santri)
+            ->with('success', 'Pembayaran berhasil.');
+
+
+    }
+
     public function setLunas($id)
     {
         $pembayaran = PembayaranSpp::findOrFail($id);

@@ -84,6 +84,8 @@ Route::post('/penagihan-santri/generate-all', [PenagihanSantriController::class,
 
 Route::get('data/tagihan/santri',[TagihanSantriController::class,'index'])->name('tagihan-santri.index');
 Route::get('penagihan-santri/{id_santri}/detail', [TagihanSantriController::class, 'show'])->name('penagihan-santri.show');
+Route::post('/admin/bayar/cash/{id}/bayar', [PembayaranController::class, 'storeCash'])->name('admin.pembayaran.cash');
+
 
 Route::get('data/user',[UserController::class,'index'])->name('user.index');
 Route::get('create/user',[UserController::class,'create'])->name('user.create');

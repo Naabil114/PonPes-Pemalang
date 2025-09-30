@@ -23,7 +23,7 @@ class KamarController extends Controller
         }
     ])->findOrFail($id);
 
-    $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.kamar.cetak_pdf', [
+    $pdf = Pdf::loadView('admin.kamar.cetak_pdf', [
         'kamar' => $kamar,
         'bulan' => $bulan,
     ])->setPaper('A4', 'portrait');
