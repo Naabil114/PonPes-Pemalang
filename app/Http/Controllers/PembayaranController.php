@@ -41,8 +41,15 @@ class PembayaranController extends Controller
         // dd($request->all());
 
         $bukti = null;
+
         if ($request->hasFile('bukti_pembayaran')) {
-            $bukti = $request->file('bukti_pembayaran')->store('bukti_pembayaran', 'public');
+            $file = $request->file('bukti_pembayaran');
+
+            // kasih nama unik biar tidak menimpa file lama
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+
+            // simpan ke storage/app/public/bukti_pembayaran
+            $bukti = $file->storeAs('bukti_pembayaran', $filename, 'public');
         }
         // dd($bukti);
         $tagihan = TagihanSpp::findOrFail($id);
@@ -69,13 +76,13 @@ class PembayaranController extends Controller
         ]);
 
         return redirect()
-    ->route('santri.tagihan.show', $tagihan->id_santri)
-    ->with('success', 'Pembayaran berhasil diajukan, menunggu verifikasi.');
+            ->route('santri.tagihan.show', $tagihan->id_santri)
+            ->with('success', 'Pembayaran berhasil diajukan, menunggu verifikasi.');
 
 
     }
 
-     public function setLunas($id)
+    public function setLunas($id)
     {
         $pembayaran = PembayaranSpp::findOrFail($id);
         $tagihan = TagihanSpp::findOrFail($pembayaran->id_tagihan);

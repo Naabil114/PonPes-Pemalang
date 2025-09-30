@@ -26,7 +26,7 @@ class PendaftaranController extends Controller
             'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|in:L,P',
             'nama_orang_tua' => 'required|string|max:180',
-            'no_telp' => 'required|string|max:13',
+            'no_telp' => 'required|string|unique:santri|max:13',
             'alamat' => 'required|string|max:500',
         ], [
             'required' => 'Field :attribute harus diisi.',
@@ -35,7 +35,7 @@ class PendaftaranController extends Controller
             'date' => 'Field :attribute harus berupa tanggal yang valid.',
             'string' => 'Field :attribute harus berupa string.',
             'numeric' => 'Field :attribute harus berupa angka.',
-
+            'unique' => 'Field :attribute sudah terdaftar.',
         ]);
 
         $user = User::create([

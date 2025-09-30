@@ -266,7 +266,6 @@
                                     @else
                                         <div class="invalid-feedback">Harap masukkan nomor telepon yang valid.</div>
                                     @endif
-                                    <small class="text-muted">Nomor ini akan menjadi username & password default.</small>
                                 </div>
 
                                 <div class="d-flex justify-content-between">

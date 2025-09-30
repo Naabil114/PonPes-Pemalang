@@ -5,10 +5,16 @@
             <div class="page-header d-flex align-items-center justify-content-between">
                 <h3 class="fw-bold mb-3">Detail Kamar: {{ $kamar->nama_kamar }}</h3>
 
-                <a href="{{ route('kamar.cetakPdf', $kamar->id_kamar) }}" target="_blank" class="btn btn-danger">
-                    Cetak PDF
-                </a>
+                <form action="{{ route('kamar.cetakPdf', $kamar->id_kamar) }}" method="GET" target="_blank"
+                    class="d-flex align-items-center gap-2">
+                    <input type="month" name="bulan" class="form-control form-control-sm"
+                        value="{{ request('bulan', now()->format('Y-m')) }}" max="{{ now()->format('Y-m') }}">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fa fa-file-pdf me-1"></i> Cetak PDF
+                    </button>
+                </form>
             </div>
+
 
 
             <div class="card mb-3">

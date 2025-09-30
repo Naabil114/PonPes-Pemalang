@@ -70,7 +70,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="14" class="text-center">Data pilih tagihan tidak tersedia</td>
+                                                <td colspan="14" class="text-center">Data tagihan tidak tersedia</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
