@@ -14,6 +14,8 @@ use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\TagihanSantriController;
 use App\Http\Controllers\PenagihanSantriController;
 use App\Http\Controllers\PilihanMakanSantriController;
+use App\Http\Controllers\LaporanPembayaranController;
+
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // Route::get('/', function () {
@@ -85,6 +87,14 @@ Route::post('/penagihan-santri/generate-all', [PenagihanSantriController::class,
 Route::get('data/tagihan/santri',[TagihanSantriController::class,'index'])->name('tagihan-santri.index');
 Route::get('penagihan-santri/{id_santri}/detail', [TagihanSantriController::class, 'show'])->name('penagihan-santri.show');
 Route::post('/admin/bayar/cash/{id}/bayar', [PembayaranController::class, 'storeCash'])->name('admin.pembayaran.cash');
+
+
+Route::get('/admin/laporan/pembayaran', [LaporanPembayaranController::class, 'index'])->name('laporan.pembayaran.index');
+Route::get('/admin/laporan/pembayaran/search-santri', [LaporanPembayaranController::class, 'searchSantri'])->name('laporan.pembayaran.searchSantri');
+Route::get('/admin/laporan/pembayaran/data', [LaporanPembayaranController::class, 'getData'])->name('laporan.pembayaran.data');
+Route::get('/admin/laporan/pembayaran/cetak-pdf', [LaporanPembayaranController::class, 'cetakPdf'])->name('laporan.pembayaran.cetakPdf');
+
+
 
 
 Route::get('data/user',[UserController::class,'index'])->name('user.index');
