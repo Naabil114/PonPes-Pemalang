@@ -36,6 +36,10 @@
 
 <body>
     <h2>Laporan Kamar: {{ $kamar->nama_kamar }}</h2>
+    @if ($bulan)
+        <p>Periode: {{ \Carbon\Carbon::parse($bulan)->translatedFormat('F Y') }}</p>
+    @endif
+
     <p>Total Santri: {{ $kamar->santri->count() }}</p>
 
     <table>

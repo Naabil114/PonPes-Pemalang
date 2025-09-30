@@ -71,29 +71,30 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <div class="form-button-action d-flex gap-2">
-                                                        {{-- Tombol Detail --}}
-                                                        <a href="{{ route('pendaftaran.show', $item->id_santri) }}">
-                                                            <button class="btn btn-info btn-sm">Detail</button>
-                                                        </a>
+                                                    <div class="form-button-action d-flex gap-2 align-items-center">
+    {{-- Tombol Detail --}}
+    <a href="{{ route('pendaftaran.show', $item->id_santri) }}" class="btn btn-info btn-sm">
+        Detail
+    </a>
 
-                                                        {{-- Tombol Terima --}}
-                                                        <button type="button" class="btn btn-success btn-sm btn-terima"
-                                                            data-id="{{ $item->id_santri }}">
-                                                            Terima  
-                                                        </button>
+    {{-- Tombol Terima --}}
+    <button type="button" class="btn btn-success btn-sm btn-terima"
+        data-id="{{ $item->id_santri }}">
+        Terima
+    </button>
 
-                                                        {{-- Tombol Tolak --}}
-                                                        <form action="{{ route('pendaftaran.tolak', $item->id_santri) }}"
-                                                            method="POST" class="d-inline form-tolak">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <button type="button" class="btn btn-danger btn-sm btn-tolak">
-                                                                Tolak
-                                                            </button>
-                                                        </form>
+    {{-- Tombol Tolak --}}
+    <form action="{{ route('pendaftaran.tolak', $item->id_santri) }}" 
+          method="POST" 
+          class="form-tolak m-0 p-0 d-flex align-items-center">
+        @csrf
+        @method('PUT')
+        <button type="button" class="btn btn-danger btn-sm btn-tolak">
+            Tolak
+        </button>
+    </form>
+</div>
 
-                                                    </div>
                                                     <!-- Modal Terima -->
                                                     <div class="modal fade" id="modalTerima" tabindex="-1"
                                                         aria-hidden="true">

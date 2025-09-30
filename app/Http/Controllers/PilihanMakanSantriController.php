@@ -10,7 +10,8 @@ class PilihanMakanSantriController extends Controller
 {
     public function index()
     {
-        $data = PilihanMakanSantri::with('santri')->get();
+        $data = PilihanMakanSantri::whereHas('santri')->with('santri')->get();
+
         return view('admin.pilihan-makan.index', compact('data'));
     }
 

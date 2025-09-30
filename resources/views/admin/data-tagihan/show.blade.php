@@ -101,6 +101,7 @@
                             @if ($p->pembayaran->isEmpty())
                                 <p class="text-muted">Belum ada pembayaran.</p>
                             @else
+                            <div class="table-responsive">
                                 <table class="table table-bordered table-sm">
                                     <thead class="table-light">
                                         <tr>
@@ -234,6 +235,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                            </div>
                             @endif
                         </div>
                     @endforeach

@@ -9,18 +9,33 @@ use Barryvdh\DomPDF\Facade\Pdf;
 class KamarController extends Controller
 {
 
-    public function cetakPdf($id)
+ public function cetakPdf($id, Request $request)
 {
+    $bulan = $request->query('bulan'); // contoh: 2025-09
+
     $kamar = Kamar::with([
         'santri.pilihanMakanTerbaru',
-        'santri.tagihanSpp'
+        'santri.tagihanSpp' => function ($q) use ($bulan) {
+            if ($bulan) {
+                $q->whereMonth('created_at', date('m', strtotime($bulan)))
+                  ->whereYear('created_at', date('Y', strtotime($bulan)));
+            }
+        }
     ])->findOrFail($id);
 
-    $pdf = Pdf::loadView('admin.kamar.cetak_pdf', compact('kamar'))
-              ->setPaper('A4', 'portrait');
+    $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.kamar.cetak_pdf', [
+        'kamar' => $kamar,
+        'bulan' => $bulan,
+    ])->setPaper('A4', 'portrait');
 
-    return $pdf->download('laporan_kamar_'.$kamar->nama_kamar.'.pdf');
+    $namaFile = 'laporan_kamar_' . $kamar->nama_kamar;
+    if ($bulan) {
+        $namaFile .= '_' . str_replace('-', '_', $bulan);
+    }
+
+    return $pdf->download($namaFile . '.pdf');
 }
+
     public function index()
     {
         $data = Kamar::all();

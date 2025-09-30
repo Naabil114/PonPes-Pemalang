@@ -12,7 +12,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-     public function login(Request $request)
+   public function login(Request $request)
 {
     $credentials = $request->validate([
         'username' => 'required',
@@ -22,12 +22,30 @@ class AuthController extends Controller
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
 
-        return redirect()->intended('dashboard')
-            ->with('success', 'Berhasil login!');
+        $user = Auth::user();
+
+        // cek role
+        if (in_array($user->role, ['admin_putri', 'admin_putra'])) {
+            return redirect()->intended('dashboard')
+                ->with('success', 'Berhasil login!');
+        } elseif ($user->role === 'santri') {
+            // kalau status santri harus aktif
+            if ($user->santri->status_santri !== 'aktif') {
+                Auth::logout();
+                return back()->with('error', 'Status akun Anda belum aktif, silakan hubungi admin.');
+            }
+
+            return redirect()->route('tagihan.pembayaran.santri.index')
+                ->with('success', 'Berhasil login!');
+        } else {
+            Auth::logout();
+            return back()->with('error', 'Role tidak dikenali.');
+        }
     }
 
     return back()->with('error', 'Username atau password salah.');
 }
+
 
 
     public function logout(Request $request)
@@ -36,7 +54,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('/')->with('success', 'Berhasil logout!');
+        return redirect()->route('/');
     }
 }
 

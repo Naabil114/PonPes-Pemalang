@@ -151,18 +151,18 @@
                                                             @if ($bayar->bukti_pembayaran)
                                                                 <button class="btn btn-sm btn-info"
                                                                     data-bs-toggle="modal"
-                                                                    data-bs-target="#buktiModal{{ $bayar->id }}">
+                                                                    data-bs-target="#buktiModal{{ $bayar->id_pembayaran }}">
                                                                     Lihat
                                                                 </button>
 
                                                                 <!-- Modal Bukti -->
-                                                                <div class="modal fade" id="buktiModal{{ $bayar->id }}" tabindex="-1"
-                                                                    aria-labelledby="buktiModalLabel{{ $bayar->id }}"
+                                                                <div class="modal fade" id="buktiModal{{ $bayar->id_pembayaran }}" tabindex="-1"
+                                                                    aria-labelledby="buktiModalLabel{{ $bayar->id_pembayaran }}"
                                                                     aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered modal-lg">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title" id="buktiModalLabel{{ $bayar->id }}">
+                                                                                <h5 class="modal-title" id="buktiModalLabel{{ $bayar->id_pembayaran }}">
                                                                                     Bukti Pembayaran
                                                                                 </h5>
                                                                                 <button type="button" class="btn-close"
